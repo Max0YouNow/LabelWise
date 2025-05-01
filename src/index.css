@@ -1,0 +1,434 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 5%; /* #0D0D0D pure matte black */
+    --foreground: 0 0% 96%; /* #F5F5F5 off-white for text */
+    
+    --card: 0 0% 10%; /* #1A1A1A dark grey for cards */
+    --card-foreground: 0 0% 96%; /* #F5F5F5 */
+    
+    --popover: 0 0% 10%; /* #1A1A1A */
+    --popover-foreground: 0 0% 96%; /* #F5F5F5 */
+    
+    /* Yellow for CTAs */
+    --primary: 45 100% 55%; /* #FFD43B */
+    --primary-foreground: 0 0% 5%; /* #0D0D0D */
+    
+    --secondary: 0 0% 16%; /* #2A2A2A slightly lighter */
+    --secondary-foreground: 0 0% 96%; /* #F5F5F5 */
+    
+    --muted: 0 0% 16%; /* #2A2A2A */
+    --muted-foreground: 0 0% 81%; /* #CFCFCF for secondary text */
+    
+    /* Green for success/verified */
+    --accent: 142 69% 49%; /* #32D74B */
+    --accent-foreground: 0 0% 5%; /* #0D0D0D */
+    
+    /* Red for destructive actions / warnings */
+    --destructive: 3 100% 61%; /* #FF453A */
+    --destructive-foreground: 0 0% 96%; /* #F5F5F5 */
+    
+    --border: 0 0% 16%; /* #2A2A2A */
+    --input: 0 0% 16%; /* #2A2A2A */
+    --ring: 45 100% 55%; /* #FFD43B */
+    
+    --radius: 1.25rem; /* 20px rounded corners as standard */
+
+    /* High contrast variables */
+    --foreground-contrast: 0 0% 96%; /* #F5F5F5 */
+    --card-contrast: 0 0% 10%; /* #1A1A1A */
+    
+    /* Status colors */
+    --status-safe: 142 69% 49%; /* #32D74B */
+    --status-moderate: 49 100% 52%; /* #FFD60A */
+    --status-unsafe: 3 100% 61%; /* #FF453A */
+  }
+  
+  .light {
+    --background: 39 30% 92%; /* #F5F1EA */
+    --foreground: 225 9% 9%; /* #191B1F */
+    
+    --card: 39 18% 81%; /* #DBD5BE */
+    --card-foreground: 225 9% 9%; /* #191B1F */
+    
+    --popover: 39 18% 81%; /* #DBD5BE */
+    --popover-foreground: 225 9% 9%; /* #191B1F */
+    
+    /* Maintain the same primary color */
+    --primary: 45 100% 55%; /* #FFD43B */
+    --primary-foreground: 225 9% 9%; /* #191B1F */
+    
+    --secondary: 39 18% 71%; /* Lighter variant of #DBD5BE */
+    --secondary-foreground: 225 9% 9%; /* #191B1F */
+    
+    --muted: 39 18% 71%; /* Lighter variant */
+    --muted-foreground: 225 9% 21%; /* Darker variant of #191B1F */
+    
+    /* Maintain accent color */
+    --accent: 142 69% 49%; /* #32D74B */
+    --accent-foreground: 225 9% 9%; /* #191B1F */
+    
+    /* Increased saturation for better contrast */
+    --destructive: 3 100% 61%; /* #FF453A */
+    --destructive-foreground: 0 0% 98%; /* #FAFAFA */
+    
+    --border: 225 9% 31%; /* Enhanced contrast */
+    --input: 39 18% 61%; /* Middle ground */
+    --ring: 45 100% 55%; /* #FFD43B */
+  }
+  
+  * {
+    @apply border-border selection:bg-primary/30 selection:text-foreground;
+  }
+  
+  body {
+    @apply text-foreground antialiased overflow-x-hidden font-sora bg-background leading-relaxed;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  /* Focus outline for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+  
+  /* Improved heading styles with better contrast */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-[#F5F5F5];
+  }
+  
+  /* Form element consistency */
+  input, select, button, textarea {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-1;
+  }
+
+  /* Ensure proper sizing of elements for better layout */
+  * {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  /* Optimized font sizes according to requirements */
+  h1 {
+    @apply text-[24px] md:text-[24px] font-bold;
+  }
+  
+  h2 {
+    @apply text-[22px] md:text-[22px] font-semibold;
+  }
+  
+  h3 {
+    @apply text-[18px] font-medium;
+  }
+  
+  p, li, label, input, textarea, select {
+    @apply text-[16px];
+  }
+  
+  .text-sm {
+    @apply text-[14px];
+  }
+  
+  .text-xs {
+    @apply text-[12px];
+  }
+  
+  /* Button specific styling for CTAs */
+  button.cta, .btn-cta {
+    @apply uppercase font-bold text-[16px] py-[16px] px-[24px] h-[48px] rounded-[20px] shadow-lg;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Added more contrast to glass effect */
+  .glass {
+    @apply backdrop-blur-lg bg-black/30 border border-white/20 shadow-md;
+  }
+  
+  /* Darker background for better contrast */
+  .glass-dark {
+    @apply backdrop-blur-lg bg-black/60 border border-white/20 shadow-md;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Reduced transition duration for better performance */
+  .smooth-transition {
+    @apply transition-all duration-200 ease-out;
+  }
+  
+  /* Status indicators with new color palette */
+  .status-safe {
+    @apply text-white bg-status-safe/80 border-status-safe;
+  }
+  
+  .status-moderate {
+    @apply text-[#0D0D0D] bg-status-moderate/80 border-status-moderate;
+  }
+  
+  .status-unsafe {
+    @apply text-white bg-status-unsafe/80 border-status-unsafe;
+  }
+  
+  /* Consistent card styles with improved contrast */
+  .product-card {
+    @apply rounded-2xl border border-ui-border/70 p-4 transition-all duration-200 hover:shadow-card-hover backdrop-blur-md bg-ui-card/95 shadow-card;
+  }
+  
+  .product-card-glass {
+    @apply backdrop-blur-md bg-card/95 border border-white/30 shadow-card rounded-xl p-4 transition-all duration-200 hover:shadow-card-hover;
+  }
+
+  .glowgrub-card {
+    @apply backdrop-blur-lg bg-ui-card/95 border border-ui-border/30 rounded-2xl shadow-card;
+  }
+  
+  .glowgrub-section {
+    @apply backdrop-blur-md bg-ui-card/95 rounded-2xl border border-ui-border/30 shadow-card p-6;
+  }
+  
+  /* Less intense gradient */
+  .yellow-gradient {
+    @apply bg-gradient-to-b from-primary/30 to-primary/15;
+  }
+  
+  /* Bento grid with consistent sizing and spacing */
+  .bento-grid {
+    @apply grid gap-4 md:gap-6 w-full;
+  }
+  
+  .bento-box {
+    @apply bg-card/95 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-card transition-all duration-200 hover:border-white/40;
+  }
+  
+  .bento-box-highlight {
+    @apply bg-primary/20 backdrop-blur-md rounded-xl p-6 border border-primary/40 shadow-card transition-all duration-200;
+  }
+
+  .bento-box-accent {
+    @apply bg-accent/20 backdrop-blur-md rounded-xl p-6 border border-accent/40 shadow-card transition-all duration-200;
+  }
+  
+  .minimal-card {
+    @apply bg-card/95 backdrop-blur-md rounded-xl p-6 shadow-card border border-white/30;
+  }
+  
+  /* Updated floating scan button with better accessibility */
+  .floating-scan-button {
+    @apply bg-primary text-primary-foreground rounded-full w-16 h-16 flex items-center justify-center shadow-button transition-all duration-200;
+  }
+  
+  /* Simplified scan pulse */
+  .scan-pulse {
+    @apply absolute w-full h-full rounded-full bg-primary/40;
+    animation: simple-pulse 2s infinite;
+  }
+  
+  /* Improved text styles with better contrast */
+  .text-title {
+    @apply text-primary font-medium tracking-wide;
+  }
+  
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  }
+  
+  .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+  }
+  
+  /* Improved high contrast options */
+  .high-contrast-text {
+    @apply text-white font-medium;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  }
+  
+  .high-contrast-card {
+    background: rgba(0, 0, 0, 0.8);
+    @apply border border-white/30 rounded-xl p-6;
+  }
+  
+  /* More accessible button styles */
+  .high-contrast-button {
+    @apply bg-primary text-black font-medium shadow-button border-2 border-primary hover:bg-primary/90 transition-colors;
+  }
+  
+  /* Simplified glow effects */
+  .glow-accent {
+    box-shadow: 0 0 12px 2px rgba(255, 224, 23, 0.4);
+  }
+  
+  .glow-yellow {
+    box-shadow: 0 0 15px rgba(255, 224, 23, 0.5);
+  }
+  
+  /* Consistent focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/70 focus:ring-offset-2 focus:ring-offset-background;
+  }
+  
+  /* Improved button styles with better contrast */
+  .btn-primary {
+    @apply bg-cta-yellow text-pure-black px-6 py-4 rounded-2xl font-bold shadow-button hover:shadow-button-hover transition-all duration-200;
+  }
+  
+  .btn-outline {
+    @apply border border-white/40 bg-transparent hover:bg-white/10 px-4 py-2 rounded-lg transition-colors duration-200;
+  }
+
+  /* Added container class for better responsiveness */
+  .container-responsive {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Better responsive grid layouts */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6;
+  }
+
+  /* Glow effects for AR mode */
+  .glow-red {
+    box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6);
+    @apply border-2 border-red-600;
+  }
+  
+  .glow-yellow {
+    box-shadow: 0 0 15px 5px rgba(204, 174, 73, 0.6);
+    @apply border-2 border-[#CCAE49];
+  }
+  
+  .glow-green {
+    box-shadow: 0 0 15px 5px rgba(54, 80, 17, 0.6);
+    @apply border-2 border-[#365011];
+  }
+  
+  /* 8pt spacing system */
+  .p-8pt {
+    @apply p-2; /* 8px */
+  }
+  
+  .p-16pt {
+    @apply p-4; /* 16px */
+  }
+  
+  .p-24pt {
+    @apply p-6; /* 24px */
+  }
+  
+  .m-8pt {
+    @apply m-2; /* 8px */
+  }
+  
+  .m-16pt {
+    @apply m-4; /* 16px */
+  }
+  
+  .m-24pt {
+    @apply m-6; /* 24px */
+  }
+  
+  /* Simplified animation keyframes */
+  .reduced-motion {
+    @apply transition-all duration-150; /* 150ms transitions */
+  }
+  
+  /* Ensure buttons meet accessibility standards */
+  .accessible-button {
+    @apply min-h-[44px] min-w-[44px] px-4;
+  }
+}
+
+.font-sora {
+  font-family: 'Sora', sans-serif;
+}
+
+/* Simplified animation keyframes for better performance */
+@keyframes simple-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.scan-animation {
+  animation: simple-pulse 2s infinite;
+}
+
+/* Enhanced glassmorphism with better contrast */
+.glassmorphism {
+  @apply backdrop-blur-xl bg-black/20 border border-white/30 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+}
+
+.neo-blur {
+  @apply backdrop-blur-2xl bg-black/75 border border-white/20;
+}
+
+.contrast-content {
+  background: rgba(0, 0, 0, 0.8);
+  @apply border border-white/30 rounded-xl p-6;
+}
+
+/* Improved text colors with better contrast */
+.yellow-text {
+  color: #FFE62C; /* Brighter yellow */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.cream-text {
+  color: #FFFFFF; /* Pure white for maximum contrast */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* For links with better accessibility */
+a:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* Dropdown menu with proper contrast */
+.dropdown-menu {
+  @apply bg-card/95 backdrop-blur-lg border border-white/30 shadow-lg rounded-lg p-2 z-50;
+}
+
+/* Added media query to prevent overflow on small screens */
+@media (max-width: 640px) {
+  .mobile-container {
+    @apply px-3;
+  }
+  
+  /* Ensure elements fit within mobile viewport */
+  .mobile-responsive {
+    @apply w-full max-w-[95vw];
+  }
+}
